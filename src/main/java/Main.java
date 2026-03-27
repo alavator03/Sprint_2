@@ -1,23 +1,24 @@
-import model.Food;
+import model.Meat;
+import model.Apple;
+import model.service.ShoppingCart;
 import model.constants.Colour;
-import service.ShoppingCart;
 
 public class Main {
     public static void main(String[] args) {
-        // Создаем продукты
-        Food meat = new Food("Мясо", 5, 100, false, null);
-        Food redApples = new Food("Яблоки красные", 10, 50, true, Colour.RED);
-        Food greenApples = new Food("Яблоки зелёные", 8, 60, true, Colour.GREEN);
+        // создание продуктов
+        Meat meat = new Meat(5, 100.0);
+        Apple redApple = new Apple(10, 50.0, Colour.RED);
+        Apple greenApple = new Apple(8, 60.0, Colour.GREEN);
 
-        // Создаем массив продуктов
-        Food[] products = {meat, redApples, greenApples};
+        // массив продуктов
+        Food[] products = {meat, redApple, greenApple};
 
-        // Инициализируем корзину
+        // инициализация корзины
         ShoppingCart cart = new ShoppingCart(products);
 
-        // Выводим результаты
-        System.out.println("Общая сумма товаров без скидки: " + cart.getTotalPriceWithoutDiscount() + " руб.");
-        System.out.println("Общая сумма товаров со скидкой: " + cart.getTotalPriceWithDiscount() + " руб.");
-        System.out.println("Сумма всех вегетарианских продуктов без скидки: " + cart.getVegetarianTotalWithoutDiscount() + " руб.");
+        // вывод результатов
+        System.out.println("Общая сумма без скидки: " + cart.getTotalWithoutDiscount());
+        System.out.println("Общая сумма со скидкой: " + cart.getTotalWithDiscount());
+        System.out.println("Сумма вегетарианских продуктов без скидки: " + cart.getVegetarianTotalWithoutDiscount());
     }
 }

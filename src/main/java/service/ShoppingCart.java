@@ -1,23 +1,47 @@
+package model.service;
+
 import model.Food;
-import model.constants.Colour;
-import service.ShoppingCart;
+import model.Discountable;
 
-public class Main {
-    public static void main(String[] args) {
-        // Создаем продукты
-        Food meat = new Food("Мясо", 5, 100, false, null);
-        Food redApples = new Food("Яблоки красные", 10, 50, true, Colour.RED);
-        Food greenApples = new Food("Яблоки зелёные", 8, 60, true, Colour.GREEN);
+public class ShoppingCart {
+    private Food[] items;
 
-        // Создаем массив продуктов
-        Food[] products = {meat, redApples, greenApples};
+    public ShoppingCart(Food[] items) {
+        this.items = items;
+    }
 
-        // Инициализируем корзину
-        ShoppingCart cart = new ShoppingCart(products);
+    // общая сумма без скидки
+    public double getTotalWithoutDiscount() {
+        double total = 0;
+        for (Food item : items) {
+            total += item.getAmount() * item.getPrice();
+        }
+        return total;
+    }
 
-        // Выводим результаты
-        System.out.println("Общая сумма товаров без скидки: " + cart.getTotalPriceWithoutDiscount() + " руб.");
-        System.out.println("Общая сумма товаров со скидкой: " + cart.getTotalPriceWithDiscount() + " руб.");
-        System.out.println("Сумма всех вегетарианских продуктов без скидки: " + cart.getVegetarianTotalWithoutDiscount() + " руб.");
+    // общая сумма со скидкой
+    public double getTotalWithDiscount() {
+        double total = 0;
+        for (Food item : items) {
+            double itemPrice = item.getAmount() * item.getPrice();
+            if (item instanceof Discountable) {
+                double discount = ((Discountable) item).getDiscount();
+                total += itemPrice * (1 - discount / 100);
+            } else {
+                total += itemPrice;
+            }
+        }
+        return total;
+    }
+
+    // сумма всех вегетарианских продуктов без скидки
+    public double getVegetarianTotalWithoutDiscount() {
+        double total = 0;
+        for (Food item : items) {
+            if (item.isVegetarian()) {
+                total += item.getAmount() * item.getPrice();
+            }
+        }
+        return total;
     }
 }
