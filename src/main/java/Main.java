@@ -1,3 +1,4 @@
+import model.Food;
 import model.Meat;
 import model.Apple;
 import model.service.ShoppingCart;
@@ -17,8 +18,8 @@ public class Main {
         ShoppingCart cart = new ShoppingCart(products);
 
         // вывод результатов
-        System.out.println("Общая сумма без скидки: " + cart.getTotalWithoutDiscount());
-        System.out.println("Общая сумма со скидкой: " + cart.getTotalWithDiscount());
-        System.out.println("Сумма вегетарианских продуктов без скидки: " + cart.getVegetarianTotalWithoutDiscount());
+        System.out.printf("Общая сумма без скидки: " + cart.getTotalWithoutDiscount());
+        System.out.printf("Общая сумма со скидкой: " + cart.getTotalWithDiscount());
+        System.out.printf("Сумма вегетарианских продуктов без скидки: " + cart.getVegetarianTotalWithoutDiscount());
     }
 }

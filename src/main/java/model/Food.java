@@ -5,9 +5,10 @@ public abstract class Food {
     protected double price;      // цена за единицу
     protected boolean isVegetarian;
 
-    public Food(int amount, double price) {
+    public Food(int amount, double price, boolean isVegetarian) {
         this.amount = amount;
         this.price = price;
+        this.isVegetarian = isVegetarian;
     }
 
     public int getAmount() {
